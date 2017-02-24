@@ -53,10 +53,17 @@ class Core extends WeModuleSite {
         return $compile;
     }
 
+    /**
+     * 获取控制器对应的PHP文件
+     * parameter@
+     *  $do 方法名
+     *  $web 是否是web(后台文件) 默认为 ture, false为手机端
+     *  $default 加载对应的php文件.默认为index
+     **/
     public function _exec($do,$web = true, $default='' ){
         global $_GPC;
 
-        $default = empty($file) ? 'index' : $default;
+        $default = empty($default) ? 'index' : $default;
 
         $do = strtolower(substr($do, $web ? 5 : 8));
         $p = trim($_GPC['p']);
@@ -73,8 +80,21 @@ class Core extends WeModuleSite {
         die;
     }
 
+    /**
+     * 获取html文件的路径
+     * parameter@
+     *  $do 对应的方法名(文件夹的名字)
+     *  $Hname 对应的html文件的名字
+     **/
 
-
+    public function getHtml($do,$Hname){
+        global $_W;
+        $Mname = $_W['current_module']['name'];
+        $st = 'http://';
+        $st .= $_SERVER['HTTP_HOST'];
+        $st .= '/addons/'.$Mname.'/template/web/'.$do.'/'.$Hname.'.html';
+        return $st;
+    }
 
 
 }
