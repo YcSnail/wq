@@ -15,15 +15,20 @@ require_once 'core/inc/user.php';
 
 class Yc_shopModuleSite extends Core {
 
-	public function doWebCategory() {
-		## 商城分类管理
-        $this->_exec(__FUNCTION__,true);
+	public function doWebShop() {
+		## 商城统一入口
+        $this->_exec(__FUNCTION__,true,'shop');
 	}
 
-    public function doWebAdv() {
-        ## 商城幻灯片管理
-        $this->_exec(__FUNCTION__,true);
-    }
+//    public function doWebAdv() {
+//        ## 商城幻灯片管理
+//        $this->_exec(__FUNCTION__,true);
+//    }
+//    public function doWebNotice() {
+//        ## 商城公告管理
+//        $this->_exec(__FUNCTION__,true);
+//    }
+
 
     public function doMobileIndex() {
         //这个操作被定义用来呈现 功能封面.

@@ -34,16 +34,16 @@
                         {/if}
                     </td>
                     <td style="text-align:left;">
-                        <a href="{php echo $this->createWebUrl('adv', array('op' => 'post', 'id' => $row['id']))}" class="btn btn-default btn-sm" title="修改"><i class="fa fa-edit"></i></a>
-                        <a href="{php echo $this->createWebUrl('adv', array('op' => 'delete', 'id' => $row['id']))}"class="btn btn-default btn-sm" onclick="return confirm('确认删除此幻灯片?')" title="删除"><i class="fa fa-times"></i></a>
+                        <a href="{php echo $this->createWebUrl('shop/adv', array('op' => 'post', 'id' => $row['id']))}" class="btn btn-default btn-sm" title="修改"><i class="fa fa-edit"></i></a>
+                        <a href="{php echo $this->createWebUrl('shop/adv', array('op' => 'delete', 'id' => $row['id']))}"class="btn btn-default btn-sm" onclick="return confirm('确认删除此幻灯片?')" title="删除"><i class="fa fa-times"></i></a>
                     </td>
                 </tr>
                 {/loop}
                 <tr>
                     <td colspan='6'>
-                        <a class='btn btn-default' href="{php echo $this->createWebUrl('adv',array('op'=>'post'))}"><i class='fa fa-plus'></i> 添加幻灯片</a>
+                        <a class='btn btn-default' href="{php echo $this->createWebUrl('shop/adv',array('op'=>'post'))}"><i class='fa fa-plus'></i> 添加幻灯片</a>
                         <input type="hidden" name="token" value="{$_W['token']}" />
-                        <input name="submit" type="submit" class="btn btn-primary" value="提交排序">
+                        <input name="submit" type="submit" class="btn btn-primary" value="提交排序" onclick="return confirm('确认更改排序?')" title="排序">
 
                     </td>
                 </tr>
@@ -59,7 +59,7 @@
 {elseif $op== 'post'}
 
 <div class="main">
-    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" onsubmit='return formcheck()'>
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
     <input type="hidden" name="id" value="{$item['id']}" />
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -78,7 +78,6 @@
             <div class="form-group">
                 <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>幻灯片标题</label>
                 <div class="col-sm-9 col-xs-12">
-
                     <input type="text" id='advname' name="advname" class="form-control" value="{$item['advname']}" />
 
                 </div>
@@ -126,14 +125,20 @@
     </form>
 </div>
 
-<script language='javascript'>
-    function formcheck() {
-        if ($("#advname").isEmpty()) {
-            Tip.focus("advname", "请填写幻灯片名称!");
-            return false;
-        }
-        return true;
-    }
+<script>
+    $(function(){
+
+        $("form").submit(function(e){
+
+            if ($("#advname").text() == '') {
+                alert('请填写幻灯片名称!');
+                return false;
+            }
+            return true;
+        });
+
+    });
+
 </script>
 {/if}
 

@@ -26,30 +26,50 @@ class Core extends WeModuleSite {
     public function template($filename){
         global $_W;
         $name = strtolower($this->modulename);
-        $defineDir = dirname($this->__define);
-
-        # 判断是否自定义路径
-        $file = strpos($filename,'/') ? '': '/index' ;
 
         if (defined('IN_SYS')) {
-            #定义插件 模版目录
-            $source = $defineDir.'/template/web/'.$filename.$file.'.html';
+            $source = IA_ROOT . "/web/themes/{$_W['template']}/{$name}/{$filename}.html";
             $compile = IA_ROOT . "/data/tpl/web/{$_W['template']}/{$name}/{$filename}.tpl.php";
-
+            if (!is_file($source)) {
+                $source = IA_ROOT . "/web/themes/default/{$name}/{$filename}.html";
+            }
+            if (!is_file($source)) {
+                $source = IA_ROOT . "/addons/{$name}/template/web/{$filename}.html";
+            }
+            if (!is_file($source)) {
+                $source = IA_ROOT . "/web/themes/{$_W['template']}/{$filename}.html";
+            }
+            if (!is_file($source)) {
+                $source = IA_ROOT . "/web/themes/default/{$filename}.html";
+            }
         } else {
-            #定义插件 模版目录
-            $source = $defineDir.'/template/mobile/'.$filename.$file.'.html';
-            $compile = IA_ROOT . "/data/tpl/app/{$_W['template']}/{$name}/{$filename}.tpl.php";
+            $template = "default";
+            $file = IA_ROOT . "/addons/".$name."/data/template/shop_" . $_W['uniacid'];
+            if (is_file($file)) {
+                $template = file_get_contents($file);
+                if (!is_dir(IA_ROOT . "/addons/".$name."/template/mobile/" . $template)) {
+                    $template = "default";
+                }
+            }
+            $compile = IA_ROOT . "/data/tpl/app/".$name."/{$template}/mobile/{$filename}.tpl.php";
+            $source = IA_ROOT . "/addons/{$name}/template/mobile/{$template}/{$filename}.html";
+            if (!is_file($source)) {
+                $source = IA_ROOT . "/addons/{$name}/template/mobile/default/{$filename}.html";
+            }
+            if (!is_file($source)) {
+                $source = IA_ROOT . "/app/themes/{$_W['template']}/{$filename}.html";
+            }
+            if (!is_file($source)) {
+                $source = IA_ROOT . "/app/themes/default/{$filename}.html";
+            }
         }
 
         if (!is_file($source)) {
             die( "Error: template source '{$filename}' is not exist!" );
         }
-
         if (DEVELOPMENT || !is_file($compile) || filemtime($source) > filemtime($compile)) {
             template_compile($source, $compile, true);
         }
-
         return $compile;
     }
 
@@ -60,8 +80,10 @@ class Core extends WeModuleSite {
      *  $web 是否是web(后台文件) 默认为 ture, false为手机端
      *  $default 加载对应的php文件.默认为index
      **/
-    public function _exec($do,$web = true, $default='' ){
+
+    public function _exec($do, $web = true , $default=''){
         global $_GPC;
+        $name = strtolower($this->modulename);
 
         $default = empty($default) ? 'index' : $default;
 
@@ -69,9 +91,9 @@ class Core extends WeModuleSite {
         $p = trim($_GPC['p']);
         empty( $p ) && ( $p = $default );
         if ($web) {
-            $file = IA_ROOT . "/addons/yc_shop/core/web/" . $do . "/" . $p . ".php";
+            $file = IA_ROOT . "/addons/".$name."/core/web/" . $do . "/" . $p . ".php";
         } else {
-            $file = IA_ROOT . "/addons/yc_shop/core/mobile/" . $do . "/" . $p . ".php";
+            $file = IA_ROOT . "/addons/".$name."/core/mobile/" . $do . "/" . $p . ".php";
         }
         if (!is_file($file)) {
             message("未找到 控制器文件 {$do}::{$p} : {$file}");
@@ -79,6 +101,38 @@ class Core extends WeModuleSite {
         include $file;
         die;
     }
+
+    /**
+     * createWebUrl()加载web端页面
+     *
+     *
+    */
+
+    public function createWebUrl($do, $query = array()){
+        global $_W;
+        $do = explode('/', $do);
+        if (count($do) > 1 && isset( $do[1] )) {
+            $query = array_merge(array( 'p' => $do[1] ), $query);
+        }
+        return $_W['siteroot'] . 'web/' . substr(parent::createWebUrl($do[0], $query, true), 2);
+    }
+
+    public function createMobileUrl($do, $query = array(), $noredirect = true){
+        global $_W, $_GPC;
+        $do = explode('/', $do);
+        if (isset( $do[1] )) {
+            $query = array_merge(array( 'p' => $do[1] ), $query);
+        }
+        if (empty( $query['mid'] )) {
+            $mid = intval($_GPC['mid']);
+            if (!empty( $mid )) {
+                $query['mid'] = $mid;
+            }
+        }
+        return $_W['siteroot'] . 'app/' . substr(parent::createMobileUrl($do[0], $query, true), 2);
+    }
+
+
 
     /**
      * 获取html文件的路径
