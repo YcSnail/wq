@@ -3,7 +3,7 @@
 	<application setting="false">
 		<name><![CDATA[yc_expressage]]></name>
 		<identifie><![CDATA[yc_expressage]]></identifie>
-		<version><![CDATA[1.1]]></version>
+		<version><![CDATA[1.2]]></version>
 		<type><![CDATA[business]]></type>
 		<ability><![CDATA[yc_expressage快递查询]]></ability>
 		<description><![CDATA[yc_expressage快递查询插件]]></description>
@@ -19,12 +19,12 @@
 	</platform>
 	<bindings>
 		<cover>
-			<entry title="查询快递信息" do="cover1" state="" direct="false" />
+			<entry title="查询快递信息" do="index" state="" direct="false" />
 			<entry title="扫一扫查快递" do="Sweep" state="" direct="false" />
 			<entry title="个人中心" do="Member" state="" direct="false" />
 		</cover>
 		<menu>
-			<entry title="查询快递" do="show1" state="" direct="false" />
+			<entry title="查询快递" do="index" state="" direct="false" />
 			<entry title="添加快递api" do="api" state="" direct="false" />
 		</menu>
 	</bindings>

@@ -42,7 +42,7 @@
 <div id="myTabContent" class="tab-content" style="background-color: #ffffff;height: 360px;">
     <div class="tab-pane fade in active" id="home">
         {loop $kcode $k}
-            <a href="{php echo $this->createMobileUrl('cover1',array('kid'=>$k['kid']) )}" style="color: #0a0a0a">
+            <a href="{php echo $this->createMobileUrl('index',array('kid'=>$k['kid']) )}" style="color: #0a0a0a">
             <li class="list-group-item list-group-item-defult" style="padding: 20px;">{$k['kname']}<spen style="padding: 20px;"> {$k['kid']} </spen></li>
             </a>
         {/loop}
@@ -50,7 +50,7 @@
     <div class="tab-pane fade" id="ios">
         {loop $kcode $i $k}
           {if $k['state'] == '3'}
-            <a href="{php echo $this->createMobileUrl('cover1',array('kid'=>$k['kid']) )}" style="color: #0a0a0a">
+            <a href="{php echo $this->createMobileUrl('index',array('kid'=>$k['kid']) )}" style="color: #0a0a0a">
                 <li class="list-group-item list-group-item-defult" style="padding: 20px;">{$k['kname']}<spen style="padding: 20px;"> {$k['kid']} </spen></li>
             </a>
           {/if}

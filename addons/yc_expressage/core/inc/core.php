@@ -78,4 +78,29 @@ class Core extends WeModuleSite {
         return $compile;
     }
 
+    /**
+     * 获取控制器对应的PHP文件
+     * parameter@
+     *  $do 方法名
+     *  $web 是否是web(后台文件) 默认为 ture, false为手机端
+     *  $default 加载对应的php文件.默认为index
+     **/
+
+    public function _exec($do, $web = true){
+        global $_GPC;
+        $name = strtolower($this->modulename);
+        $do = strtolower(substr($do, $web ? 5 : 8));
+
+        if ($web) {
+            $file = IA_ROOT . "/addons/".$name."/core/web/" . $do .  ".php";
+        } else {
+            $file = IA_ROOT . "/addons/".$name."/core/mobile/" . $do . ".php";
+        }
+        if (!is_file($file)) {
+            message("未找到 控制器文件 {$do} : {$file}");
+        }
+        include $file;
+        die;
+    }
+
 }
