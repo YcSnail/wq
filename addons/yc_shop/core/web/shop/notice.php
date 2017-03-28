@@ -20,4 +20,6 @@ $op = empty($_GPC['op']) ?'display':$_GPC['op'] ;
 
 
 
+
+
 include $this->template('shop/notice');

@@ -9,7 +9,6 @@
 ## 商城幻灯片管理
 global $_W,$_GPC;
 
-$do = $_GPC['do'];
 
 load()->func('tpl');
 #表名
@@ -28,19 +27,17 @@ if ($op== 'display'){
     $list  = pdo_getall($tbName,$advData,'','','displayorder DESC','10');
 
     if (empty($list)){
-        message('幻灯片列表为空,请前去添加', $this->createWebUrl('adv', array('op'=>'add'))  , 'error');
+        message('幻灯片列表为空,请前去添加', $this->createWebUrl('shop/adv', array('op'=>'post'))  , 'error');
     }
 
     if (!empty($_GPC['displayorder'])) {
         foreach ($_GPC['displayorder'] as $id => $displayorder) {
             pdo_update($tbName, array('displayorder' => $displayorder), array('id' => $id));
         }
-        message('分类排序更新成功！', $this->createWebUrl('adv', array('op' => 'display')), 'success');
+        message('分类排序更新成功！', $this->createWebUrl('shop/adv', array('op' => 'display')), 'success');
     }
 
-}
-
-else if ($op== 'post'){
+} else if ($op== 'post'){
     # 编辑幻灯片
     $id = intval($_GPC['id']);
     $advData['id']=$id;
@@ -59,26 +56,24 @@ else if ($op== 'post'){
         #判断是否为修改提交
         if (empty($_GPC['id'])){
             pdo_insert($tbName,$advData);
-            message('添加幻灯片成功！', $this->createWebUrl('adv', array('op' => 'display')), 'success');
+            message('添加幻灯片成功！', $this->createWebUrl('shop/adv', array('op' => 'display')), 'success');
         }else{
             pdo_update($tbName,$advData,array('id'=>$_GPC['id']));
-            message('更新幻灯片成功！', $this->createWebUrl('adv', array('op' => 'display')), 'success');
+            message('更新幻灯片成功！', $this->createWebUrl('shop/adv', array('op' => 'display')), 'success');
         }
 
     }
 
-}
-
-else if ($op== 'delete'){
+} else if ($op== 'delete'){
     # 删除幻灯片
     $id = intval($_GPC['id']);
     $advData['id']=$id;
     $res = pdo_get($tbName,$advData);
     if (empty($res)){
-        message('您要删除的幻灯片不存在！', $this->createWebUrl('adv', array('op' => 'display')), 'error');
+        message('您要删除的幻灯片不存在！', $this->createWebUrl('shop/adv', array('op' => 'display')), 'error');
     }else{
         pdo_delete($tbName,$advData);
-        message('您要删除成功！', $this->createWebUrl('adv', array('op' => 'display')), 'success');
+        message('您要删除成功！', $this->createWebUrl('shop/adv', array('op' => 'display')), 'success');
     }
 }
 
