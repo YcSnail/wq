@@ -128,9 +128,9 @@
 <script>
     $(function(){
 
-        $("form").submit(function(e){
+        $("form").submit(function(){
 
-            if ($("#advname").text() == '') {
+            if ($("#advname").val() == '') {
                 alert('请填写幻灯片名称!');
                 return false;
             }

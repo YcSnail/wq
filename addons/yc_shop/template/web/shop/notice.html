@@ -1,6 +1,6 @@
 {template 'common/header'}
 
-{if $operation == 'display'}
+{if $op == 'display'}
 <form action="" method="post">
     <div class="panel panel-default">
         <div class="panel-body table-responsive">
@@ -61,10 +61,10 @@
     });
 </script>
 
-{elseif $operation == 'post'}
+{elseif $op == 'post'}
 
 <div class="main">
-    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" onsubmit='return formcheck()'>
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" >
     <input type="hidden" name="id" value="{$notice['id']}" />
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -101,7 +101,6 @@
                 <label class="col-xs-12 col-sm-3 col-md-2 control-label">公告内容</label>
                 <div class="col-sm-9 col-xs-12">
                     {php echo tpl_ueditor('detail',$notice['detail'])}
-                    <a href='javascript:preview_html("#detail")' class="btn btn-default">查看内容</a>
                 </div>
             </div>
 
@@ -114,7 +113,6 @@
                     <label class='radio-inline'>
                         <input type='radio' name='status' value=0' {if $notice['status']==0}checked{/if} /> 否
                     </label>
-                    <div class='form-control-static'>{if empty($notice['status'])}否{else}是{/if}</div>
                 </div>
             </div>
             <div class="form-group"></div>
@@ -133,14 +131,19 @@
     </form>
 </div>
 
-<script language='javascript'>
-    function formcheck() {
-        if ($("#title").isEmpty()) {
-            Tip.focus("title", "请填写公告标题!");
-            return false;
-        }
-        return true;
-    }
+<script>
+    $(function(){
+
+        $("form").submit(function(){
+            if ($("#advname").text() == '') {
+                alert('请填写幻灯片名称!');
+                return false;
+            }
+            return true;
+        });
+
+    });
+
 </script>
 {/if}
 
