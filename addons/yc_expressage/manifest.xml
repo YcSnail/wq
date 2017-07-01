@@ -3,7 +3,7 @@
 	<application setting="false">
 		<name><![CDATA[yc_expressage]]></name>
 		<identifie><![CDATA[yc_expressage]]></identifie>
-		<version><![CDATA[1.2]]></version>
+		<version><![CDATA[2.0]]></version>
 		<type><![CDATA[business]]></type>
 		<ability><![CDATA[yc_expressage快递查询]]></ability>
 		<description><![CDATA[yc_expressage快递查询插件]]></description>

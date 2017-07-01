@@ -18,5 +18,11 @@ define('IA_FRAMEWORK', IA_ROOT . DS .'framework');
 define('Mname', $_W['current_module']['name']);
 define('IA_Mname', IA_ADDONS . DS . Mname);
 
+define('IA_STATIC', $_W['siteroot'] .'addons'. DS . $_W['current_module']['name'] . DS . 'static');
+define('IA_IMAGES', IA_STATIC . DS . 'images');
+define('IA_JS', IA_STATIC . DS . 'js');
+define('IA_CSS', IA_STATIC . DS . 'css');
+
+
 define('IA_CORE', IA_Mname . DS .'core');
 define('IA_CORE_API', IA_CORE . DS . 'api');

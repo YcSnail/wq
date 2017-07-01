@@ -1,6 +1,6 @@
 <?php
 
-class express{
+class api_Model{
 
     function goGit($name,$id,$EBusinessID,$AppKey){
         $api = $this->getOrderTracesByJson($name,$id,$EBusinessID,$AppKey);
@@ -76,10 +76,3 @@ class express{
 
 
 }
-
-//
-//$goGit = new express();
-//$goGit = $goGit->goGit($name,$id,$EBusinessID,$AppKey);
-//var_dump($goGit);
-
-?>

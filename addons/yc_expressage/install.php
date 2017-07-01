@@ -7,8 +7,8 @@
 */
 $sql = "
 
-DROP TABLE IF EXISTS `ims_yc_expressage_api`;
-CREATE TABLE `ims_yc_expressage_api` (
+DROP TABLE IF EXISTS `ims_yc_expressage_api_v2`;
+CREATE TABLE `ims_yc_expressage_api_v2` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uniacid` int(11) DEFAULT '0' COMMENT '公众号id',
   `uid` int(11) DEFAULT NULL COMMENT '管理员id',
@@ -20,8 +20,8 @@ CREATE TABLE `ims_yc_expressage_api` (
   KEY `idx_key` (`key`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `ims_yc_expressage_user`;
-CREATE TABLE `ims_yc_expressage_user` (
+DROP TABLE IF EXISTS `ims_yc_expressage_user_v2`;
+CREATE TABLE `ims_yc_expressage_user_v2` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `uniacid` int(11) DEFAULT NULL COMMENT '公众号id',
   `uid` int(11) DEFAULT NULL COMMENT '管理员id',

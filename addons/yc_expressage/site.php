@@ -10,6 +10,7 @@ defined('IN_IA') or exit('Access Denied');
 require 'core/inc/core.php';
 require 'core/inc/define.php';
 require 'core/inc/user.php';
+require 'function.php';
 
 class Yc_expressageModuleSite extends Core {
 	public $tableApi = 'yc_expressage_api';
@@ -48,23 +49,6 @@ class Yc_expressageModuleSite extends Core {
 	public function doMobiletest(){
 		global $_W;
 		include $this->template('test');
-	}
-	# 匹配快递状态
-	public function state($state){
-		switch ($state){
-			case '2':
-				$state = '在途中';
-				break;
-			case '3':
-				$state = '已签收';
-				break;
-			case '4':
-				$state = '问题件';
-				break;
-			default:
-				$state = '暂未查询到快递信息';
-		}
-		return $state;
 	}
 
 }

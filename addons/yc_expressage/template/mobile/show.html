@@ -12,12 +12,12 @@
     </div>
 </div>
 
-<span class="label label-primary">快递名称:{$show['kname']}</span>
-<span class="label label-primary">快递单号:{$show['kid']}</span>
-<span class="label label-success">订单状态:{$show['state']}</span>
+<span class="label label-success">{$show['state']}</span>
+<span class="label label-default">{$show['kname']}</span>
+<span class="label label-primary">{$show['kid']}</span>
 <ul class="list-group">
 
-    {loop $res['Traces'] $i $g}
+    {loop $traces $i $g}
     <li class="list-group-item list-group-item-defult">{$g['AcceptTime']}</li>
     <li class="list-group-item list-group-item-success" style="padding-left: 30px;">{$g['AcceptStation']}</li>
     {/loop}

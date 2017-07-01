@@ -23,7 +23,7 @@ if (empty($member['nickname'])){
     $member['nickname'] = '去吧皮卡丘';
 }
 if (empty($member['images']['avatar'])){
-    $member['images']['avatar'] = 'http://yuanxu.top/images/empty.jpg';
+    $member['images']['avatar'] = IA_IMAGES.'/empty.jpg';
 }
 
 # 统计有几条数据

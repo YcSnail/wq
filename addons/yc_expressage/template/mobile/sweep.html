@@ -8,9 +8,9 @@
 
 
 <div id="show">
-    <span class="label label-primary" id="ShipperName">快递名称:</span>
-    <span class="label label-primary" id="id">快递单号:</span>
-    <span class="label label-success" id="State">订单状态:</span>
+    <span class="label label-success" id="State"></span>
+    <span class="label label-default" id="ShipperName"></span>
+    <span class="label label-primary" id="id"></span>
     <ul class="list-group" id="group">
 
     </ul>
@@ -21,39 +21,43 @@
     $("#show").hide();
 
 
-    wx.ready(function() {
-        wx.scanQRCode({
-            needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-            scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-            success: function (res) {
-                window.result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-                show();
-            }
-        });
-    });
+//    wx.ready(function() {
+//        wx.scanQRCode({
+//            needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+//            scanType: ["barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+//            success: function (res) {
+//                var code = res.resultStr;
+//                var code = '885607110229647186';
+//                show(code);// 当needResult 为 1 时，扫码返回的结果
+//            }
+//        });
+//    });
 
-    function show() {
+    var code = 'asd,885607110229647186';
+    show(code);// 当needResult 为 1 时，扫码返回的结果
+
+    function show(code) {
         var url = "{php echo $this->createMobileUrl('get')}";
+
         $.ajax({
                 type: "POST",
                 url: url,
                 async: false,
                 dataType: 'json',
-                data: {code:result},
+                data: {code:code},
                 success: function(res){
-                    //判断状态
 
+                    //判断状态
                     if (res.status > 0){
+                        var arrMsg = res.msg;
                         $("#show").show();
-                        $("#ShipperName").append(res.kname);
-                        $("#id").append(res.kid);
-                        $("#State").append(res.state);
-                        //AcceptStation
-                        //AcceptTime
-                        for (var i=0; i<res.Traces.length; i++)
-                        {
-                            var res_time = res.Traces[i]['AcceptTime'];
-                            var res_text = res.Traces[i]['AcceptStation'];
+                        $("#ShipperName").append(arrMsg.kname);
+                        $("#id").append(arrMsg.kid);
+                        $("#State").append(arrMsg.state);
+
+                        for (var i=0; i < arrMsg.Traces.length; i++){
+                            var res_time = arrMsg.Traces[i]['AcceptTime'];
+                            var res_text = arrMsg.Traces[i]['AcceptStation'];
                             $("#group").append("<li class='list-group-item list-group-item-defult'>"+res_time+"</li>");
                             $("#group").append("<li class='list-group-item list-group-item-success' style='padding-left: 30px;'>"+res_text+"</li>");
                         }
@@ -70,5 +74,14 @@
         );
 
     }
+
+    function transform(obj){
+        var arr = [];
+        for(var item in obj){
+            arr.push(obj[item]);
+        }
+        return arr;
+    }
+
 </script>
 {template 'common/_footer'}

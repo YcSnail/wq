@@ -1,18 +1,27 @@
 {template 'common/header'}
 
-<div class="panel-heading">
-    <h3 class="panel-title" style="text-align: center">快递信息</h3>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title" style="text-align: center">快递信息</h3>
+    </div>
+    <div class="panel-body">
+
+        <div style=" margin-bottom: 10px;">
+            <span class="label label-success">{$show['state']}</span>
+            <span class="label label-default">{$show['kname']}</span>
+            <span class="label label-primary">{$show['kid']}</span>
+        </div>
+
+        <ul class="list-group">
+            {loop $traces $i $g}
+            <li class="list-group-item list-group-item-defult">{$g['AcceptTime']}</li>
+            <li class="list-group-item list-group-item-success" style="padding-left: 30px;">{$g['AcceptStation']}</li>
+            {/loop}
+        </ul>
+        <button type="button" class="btn btn-default" ><a href="{php echo $this->createWebUrl('index')}" >返回首页</a></button>
+
+    </div>
 </div>
 
-<span class="label label-primary">快递名称:{$nameShow}</span>
-<span class="label label-primary">快递单号:{$id}</span>
-<span class="label label-success">订单状态:{$goGit['State']}</span>
-<ul class="list-group">
-
-    {loop $goGit['Traces'] $i $g}
-    <li class="list-group-item list-group-item-defult">{$g['AcceptTime']}</li>
-    <li class="list-group-item list-group-item-success" style="padding-left: 30px;">{$g['AcceptStation']}</li>
-    {/loop}
-</ul>
-<button type="button" class="btn btn-default" ><a href="{php echo $this->createWebUrl('index')}" >返回首页</a></button>
 {template 'common/footer'}

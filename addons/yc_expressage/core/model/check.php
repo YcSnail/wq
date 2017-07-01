@@ -1,6 +1,11 @@
 ﻿<?php
 
-class check{
+
+/**
+ * 根据快递单号查询 对应的快递公司和对应的编号
+ * Class check
+ */
+class check_Model{
 
         function goGit($id,$EBusinessID,$AppKey){
                 $api = $this->getOrderTracesByJson($id,$EBusinessID,$AppKey);
@@ -72,5 +77,3 @@ class check{
         }
 
 }
-
-?>

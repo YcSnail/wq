@@ -8,8 +8,6 @@
 # 重新定义 template() 方法
 
 
-
-
 if (!defined('IN_IA')) {
     die( 'Access Denied' );
 }
@@ -17,6 +15,15 @@ if (!defined('IN_IA')) {
 class Core extends WeModuleSite {
     public $footer = array();
     public $header = null;
+
+    public function __construct(){
+
+        /* 判断是否为微信 */
+        if(is_wechat()){
+            m('member')->checkMember();
+        }
+
+    }
 
     public function template($filename, $type = TEMPLATE_INCLUDEPATH){
         global $_W;
@@ -102,5 +109,7 @@ class Core extends WeModuleSite {
         include $file;
         die;
     }
+
+
 
 }
