@@ -1,14 +1,15 @@
 <?php
-/*
-----------------------------------
-*|  auther:  yc  yc@yuanxu.top
-*|  website: yuanxu.top
----------------------------------------
-*/
+// +----------------------------------------------------------------------
+// |  [ 我的梦想是星辰大海 ]
+// +----------------------------------------------------------------------
+// | Author: yc  yc@yuanxu.top
+// +----------------------------------------------------------------------
+// | Date: 17.7.1 Time: 14:54
+// +----------------------------------------------------------------------
 $sql = "
 
-DROP TABLE IF EXISTS `ims_yc_expressage_api_v2`;
-CREATE TABLE `ims_yc_expressage_api_v2` (
+DROP TABLE IF EXISTS `ims_yc_expressage_api`;
+CREATE TABLE `ims_yc_expressage_api` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uniacid` int(11) DEFAULT '0' COMMENT '公众号id',
   `uid` int(11) DEFAULT NULL COMMENT '管理员id',
@@ -20,11 +21,10 @@ CREATE TABLE `ims_yc_expressage_api_v2` (
   KEY `idx_key` (`key`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `ims_yc_expressage_user_v2`;
-CREATE TABLE `ims_yc_expressage_user_v2` (
+DROP TABLE IF EXISTS `ims_yc_expressage_user`;
+CREATE TABLE `ims_yc_expressage_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `uniacid` int(11) DEFAULT NULL COMMENT '公众号id',
-  `uid` int(11) DEFAULT NULL COMMENT '管理员id',
   `openid` varchar(255) DEFAULT NULL COMMENT '用户openid',
   `kname` varchar(255) DEFAULT NULL COMMENT '快递名称',
   `kid` varchar(255) DEFAULT NULL COMMENT '快递编号',

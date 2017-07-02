@@ -1,14 +1,15 @@
 <?php
-/*
-----------------------------------
-*|  auther:  yc  yc@yuanxu.top
-*|  website: yuanxu.top
----------------------------------------
-*/
+// +----------------------------------------------------------------------
+// |  [ 我的梦想是星辰大海 ]
+// +----------------------------------------------------------------------
+// | Author: yc  yc@yuanxu.top
+// +----------------------------------------------------------------------
+// | Date: 17.7.1 Time: 14:54
+// +----------------------------------------------------------------------
 
 global $_W;
 $sql = "
-DROP TABLE IF EXISTS `ims_yc_expressage_api_v2`;
-DROP TABLE IF EXISTS `ims_yc_expressage_user_v2`;
+DROP TABLE IF EXISTS `ims_yc_expressage_api`;
+DROP TABLE IF EXISTS `ims_yc_expressage_user`;
 ";
 pdo_query($sql);

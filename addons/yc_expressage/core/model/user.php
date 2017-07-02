@@ -13,7 +13,8 @@ class User_Model{
     public function __construct()
     {
         global $_W;
-        $this->sessionid = "__cookie_ewei_shop_201507200000_{$_W['uniacid']}";
+        $cookieTime = time();
+        $this->sessionid = "__cookie_yc_expressage_{$cookieTime}_{$_W['uniacid']}";
     }
     function getOpenid()
     {

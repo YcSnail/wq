@@ -15,12 +15,12 @@ if (empty( $kid ) ){
 
 $pre  = m('expressage');
 # 查询是否存在 该数据
-$res = $pre->checKid($kid);
+$res = $pre->checKid($kid,true);
 
 if (empty( $res ) || $res['state'] !=3){
 
     # 查询快递信息
-    $rescod = $pre->getExpressage($kid);
+    $rescod = $pre->getExpressage($kid,true);
 
     # 组成html页面显示数据
     $state = state($rescod['State']);
