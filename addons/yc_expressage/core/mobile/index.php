@@ -12,7 +12,7 @@ $uniacid = $_W['uniacid'];
 load()->func('tpl');
 $op = empty($_GPC['op']) ? 'index' : $_GPC['op'];
 
-if( checksubmit('check') ) {
+if( checksubmit('check') || !empty($_GPC['member']) ) {
 
     # 获取用户填写的 快递单号
     $kid = intval(trim($_GPC['kid'],''));
