@@ -1,0 +1,27 @@
+
+
+<script type="text/javascript">
+    $(function(){
+        wx.config(jssdkconfig);
+        var $_share = {php echo json_encode($_share);};
+        if(typeof sharedata == 'undefined'){
+            sharedata = $_share;
+        } else {
+            sharedata['title'] = sharedata['title'] || $_share['title'];
+            sharedata['desc'] = sharedata['desc'] || $_share['desc'];
+            sharedata['link'] = sharedata['link'] || $_share['link'];
+            sharedata['imgUrl'] = sharedata['imgUrl'] || $_share['imgUrl'];
+        }
+
+        wx.ready(function () {
+            wx.onMenuShareAppMessage(sharedata);
+            wx.onMenuShareTimeline(sharedata);
+            wx.onMenuShareQQ(sharedata);
+            wx.onMenuShareWeibo(sharedata);
+        });
+
+    });
+</script>
+
+</body>
+</html>

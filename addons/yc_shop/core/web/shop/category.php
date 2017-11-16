@@ -27,8 +27,10 @@ $parentid = $_GPC['parentid'];
 if ($op == 'display'){
 
     if (empty($parentid)){
+
         $time = pdo_getall($tbName,$catData);
     }else{
+
         $time = pdo_getall($tbName,$catData);
     }
 

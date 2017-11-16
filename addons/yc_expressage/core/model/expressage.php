@@ -71,7 +71,6 @@ class expressage_Model{
 
         $Code = $result['Shippers'][0];
         if (empty($Code['ShipperCode'])){
-
             if ($is_ajax){
                 ajax_res(-1,'暂不支持该快递公司.请换一个订单再试');
             }

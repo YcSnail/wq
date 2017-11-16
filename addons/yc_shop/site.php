@@ -20,21 +20,7 @@ class Yc_shopModuleSite extends Core {
         $this->_exec(__FUNCTION__,true,'shop');
 	}
 
-//    public function doWebAdv() {
-//        ## 商城幻灯片管理
-//        $this->_exec(__FUNCTION__,true);
-//    }
-//    public function doWebNotice() {
-//        ## 商城公告管理
-//        $this->_exec(__FUNCTION__,true);
-//    }
-
-
     public function doMobileIndex() {
-        //这个操作被定义用来呈现 功能封面.
-        $this->_exec(__FUNCTION__,false);
-    }
-    public function doMobileTest() {
         //这个操作被定义用来呈现 功能封面.
         $this->_exec(__FUNCTION__,false);
     }

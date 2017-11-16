@@ -21,6 +21,7 @@ $advData = array(
     'uniacid'=>$_W['uniacid'],
 );
 
+
 # 默认展示已有幻灯片列表
 if ($op== 'display'){
     #参数 $tablename, $params = array(), $fields = array(), $keyfield = '', $orderby = array(), $limit = array()

@@ -4,7 +4,35 @@
 {if $op == 'display'}
 
 <style type='text/css'>
-    .dd-handle { height: 40px; line-height: 30px}
+
+    .btn {
+        display: inline-block;
+        overflow: visible;
+        padding: 0 22px;
+        height: 34px;
+        line-height: 34px;
+        vertical-align: middle;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        font-size: 14px;
+        border-width: 1px;
+        border-style: solid;
+        cursor: pointer;
+    }
+
+    .btn-right{
+        text-align: center;
+        margin-top: -6px;
+        height: 30px;
+        float: right;
+    }
+    .btn-p{
+        margin-left: 30px;
+    }
+
 </style>
 <div class="main">
     <div class="category">
@@ -12,12 +40,28 @@
             <div class="panel panel-default">
                 <div class="panel-body table-responsive">
                     <div class="dd" id="div_nestable">
+
+                        <div class="row">
+                            <div class="col-lg-6">
+
+                                <div class="list-group">
+                                    <p class="list-group-item" style="height: 40px;">
+                                        <span>ID:1 分类1</span>
+
+                                        <a class="btn btn-default btn-sm btn-right" href="#"><i class="fa fa-plus"></i></a>
+                                        <a class="btn btn-default btn-sm btn-right" href="#"><i class="fa fa-edit"></i></a>
+                                        <a class="btn btn-default btn-sm btn-right" href="#"><i class="fa fa-remove"></i></a>
+
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+
                         <table class='table'>
                             <tr>
                                 <td>
-
                                     <a href="{php echo $this->createWebUrl('shop/category',array('op' => 'post'))}" class="btn btn-default"><i class="fa fa-plus"></i> 添加新分类</a>
-
                                     <input id="save_category" type="button" class="btn btn-primary" value="保存分类修改">
                                     <input type="hidden" name="token" value="{$_W['token']}" />
                                 </td>
@@ -29,6 +73,8 @@
         </form>
     </div>
 </div>
+
+
 
 {else if $op == 'post'}
 <div class="main">

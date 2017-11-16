@@ -1,0 +1,239 @@
+{template 'common/test/_header'}
+
+<style>
+
+    .member-top-img{
+        width: 50px;
+        height: 50px;
+        float: left;
+        border-radius: 6px
+    }
+
+    .member-top-p{
+        margin-left: 16px;
+        float: left;
+        margin-top: 16px;
+    }
+
+    .member-main-div-p2{
+        border-radius: 21px;
+        color: #fff;
+        background: #1E90FF;
+        width: 26px;
+        height: 26px;
+        margin-left: 16px;
+        line-height: 26px;
+        text-align: center;
+    }
+
+    .mui-control-content {
+        background-color: white;
+        min-height: 215px;
+    }
+    .mui-control-content .mui-loading {
+        margin-top: 50px;
+    }
+
+    .mui-scroll > .mui-table-view > .mui-table-view-cell p {
+        color: #000000;
+    }
+
+</style>
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-pull-left"></a>
+    <h1 class="mui-title">个人中心</h1>
+</header>
+
+<div class="mui-content">
+
+    <div class="mui-card">
+        <!--页眉，放置标题-->
+        <div class="mui-card-header">
+            <div>
+                <img class="member-top-img" src="{IA_IMAGES}/empty.jpg" alt="个人头像">
+                <p  class="member-top-p">会跑的蜗牛</p>
+            </div>
+
+            <div class="member-main-div" style="margin-right: 16px;">
+                <p class="member-main-div-p1">快递总数</p>
+                <p class="member-main-div-p2">18</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mui-card">
+        <div id="slider" class="mui-slider">
+            <div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                <a class="mui-control-item" href="#item1mobile">
+                    未签收
+                </a>
+                <a class="mui-control-item" href="#item2mobile">
+                    已签收
+                </a>
+                <a class="mui-control-item" href="#item3mobile">
+                    全部快递
+                </a>
+            </div>
+            <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+            <div class="mui-slider-group">
+                <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+                    <div id="scroll1" class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view">
+                                <li class="mui-table-view-cell" style="display: none;">
+                                    <div>
+                                        <a href="">
+                                            <p>圆通快递</p>
+                                            <p>1031542465</p>
+                                            <p>2017-06-07 16:15</p>
+                                        </a>
+                                    </div>
+
+                                    <div class="mui-switch mui-switch-mini">
+                                            <div class="mui-switch-handle"></div>
+                                    </div>
+
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="item2mobile" class="mui-slider-item mui-control-content">
+                    <div id="scroll2" class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <div class="mui-loading">
+                                <div class="mui-spinner">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="item3mobile" class="mui-slider-item mui-control-content">
+                    <div id="scroll3" class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <div class="mui-loading">
+                                <div class="mui-spinner">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+
+    $().ready(function () {
+
+
+            // ajax获取数据
+
+            var url = "{php echo $this->createMobileUrl('member')}";
+            url += '&is_ajax=1';
+
+            mui.post(
+                url,
+                function(data){
+
+                    if (data.code == 0){
+                        var msg = data.msg;
+
+                        var html1 = ''; //未签收
+                        var html2 = ''; //已签收
+                        var html3 = ''; //全部
+
+                        for (i=0; i<msg.length;i++){
+
+                            if (msg[i]['state'] < 3){
+                                html1 +=
+                                        '<li class="mui-table-view-cell">'+
+                                            '<div>'+
+                                                '<a href="">'+
+                                                    '<p>'+msg[i]['kname']+'</p>'+
+                                                    '<p>'+msg[i]['kcode']+'</p>'+
+                                                    '<p>'+msg[i]['createtime']+'</p>'+
+                                                '</a>'+
+                                            '</div>'+
+
+//                                            '<div class="mui-switch mui-switch-mini" data-switch="2">'+
+//                                                '<div class="mui-switch-handle"></div>'+
+//                                            '</div>'+
+
+                                        '<div class="mui-switch mui-switch-mini" data-switch="3" style="transition-duration: 0.2s;">'+
+                                    '<div class="mui-switch-handle" style="transition-duration: 0.2s; transform: translate(0px, 0px);"></div>'+
+                                    '</div>'+
+
+                                        '</li>';
+                                html3 +='';
+
+                            }else if(msg[i]['state'] == 3){
+                                html2 +='';
+                                html3 +='';
+                            }
+
+                        }
+
+                        setHtml(html1,html2,html3);
+                    }
+
+                },'json'
+            );
+
+            function setHtml(html1,html2,html3) {
+
+                // 设置第一个标签的值
+                $("#scroll1 .mui-scroll > .mui-table-view").append(html1);
+
+                mui.init({
+                    swipeBack: false
+                });
+                    (function($) {
+                    $('.mui-scroll-wrapper').scroll({
+                        indicators: true //是否显示滚动条
+                    });
+
+                    // 设置其他标签
+                    var item2 = document.getElementById('item2mobile');
+                    var item3 = document.getElementById('item3mobile');
+                    document.getElementById('slider').addEventListener('slide', function(e) {
+
+                        if (e.detail.slideNumber === 1) {
+                            if (item2.querySelector('.mui-loading')) {
+                                setTimeout(function() {
+                                    item2.querySelector('.mui-scroll').innerHTML = html2;
+                                }, 500);
+                            }
+                        } else if (e.detail.slideNumber === 2) {
+                            if (item3.querySelector('.mui-loading')) {
+                                setTimeout(function() {
+                                    item3.querySelector('.mui-scroll').innerHTML = html3;
+                                }, 500);
+                            }
+                        }
+                    });
+                    var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
+                    $('.mui-input-group').on('change', 'input', function() {
+                        if (this.checked) {
+                            sliderSegmentedControl.className = 'mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-' + this.value;
+                            //force repaint
+                            sliderProgressBar.setAttribute('style', sliderProgressBar.getAttribute('style'));
+                        }
+                    });
+                })(mui);
+            }
+    });
+
+</script>
+
+
+{template 'common/test/_footer'}

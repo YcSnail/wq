@@ -26,6 +26,7 @@ function m($name = ''){
         return $_modules[$name];
     }
     $model = IA_CORE . "/model/" . strtolower($name) . '.php';
+
     if (!is_file($model)) {
         die(' Model ' . $name . ' Not Found!');
     }
@@ -98,7 +99,14 @@ function ajax_res($code,$msg){
         'status'=>$code,
         'msg'=>$msg
     );
+    die(json_encode($res));
+}
 
+function ajaxRes($code,$msg){
+    $res = array(
+        'code'=>$code,
+        'msg'=>$msg
+    );
     die(json_encode($res));
 }
 

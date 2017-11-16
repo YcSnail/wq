@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns="http://www.we7.cc" versionCode="0.6">
+<manifest xmlns="http://yuanxu.top" versionCode="0.6">
 	<application setting="false">
 		<name><![CDATA[yc_shop商城]]></name>
 		<identifie><![CDATA[yc_shop]]></identifie>
@@ -56,7 +56,7 @@
 		</menu>
 	</bindings>
 
-	<install><![CDATA[]]></install>
-	<uninstall><![CDATA[]]></uninstall>
-	<upgrade><![CDATA[]]></upgrade>
+	<install><![CDATA[install.php]]></install>
+	<uninstall><![CDATA[unstall.php]]></uninstall>
+	<upgrade><![CDATA[updata.php]]></upgrade>
 </manifest>

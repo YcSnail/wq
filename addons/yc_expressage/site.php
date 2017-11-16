@@ -47,9 +47,8 @@ class Yc_expressageModuleSite extends Core {
         $this->_exec(__FUNCTION__,false);
 	}
 
-	public function doMobiletest(){
-		global $_W;
-		include $this->template('test');
+	public function doWebtest(){
+        $this->_exec(__FUNCTION__,true);
 	}
 
 }

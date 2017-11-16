@@ -42,29 +42,96 @@
 <div id="myTabContent" class="tab-content" style="background-color: #ffffff;height: 360px;">
     <div class="tab-pane fade in active" id="home">
         {loop $kcode $k}
-            <a href="{php echo $this->createMobileUrl('index',array('kid'=>$k['kid'],'member'=>true,'op'=>'show' ) )}" style="color: #0a0a0a">
-            <li class="list-group-item list-group-item-defult" style="padding: 20px;">{$k['kname']}<spen style="padding: 20px;"> {$k['kid']} </spen></li>
-            </a>
+            <li class="list-group-item list-group-item-defult" style="padding: 20px;">
+                <span class="href" data-href="{php echo $this->createMobileUrl('index',array('kid'=>$k['kid'],'member'=>true,'op'=>'show' ) )}" >
+                    <span>
+                    {$k['kname']}
+                    </span>
+                    <spen style="padding: 0 10px">
+                        {$k['kid']}
+                    </spen>
+                </span>
+                <span style=" float: right;">
+                    {if $k['is_subscribe'] == '0'}
+                    <button class="btn btn-success subscribe" data-subscribe="1">订阅</button>
+                    {else}
+                        <button class="btn btn-primary subscribe" data-subscribe="0">取消订阅</button>
+                    {/if}
+                </span>
+
+            </li>
         {/loop}
     </div>
     <div class="tab-pane fade" id="ios">
         {loop $kcode $i $k}
           {if $k['state'] == '3'}
-            <a href="{php echo $this->createMobileUrl('index',array('kid'=>$k['kid']) )}" style="color: #0a0a0a">
-                <li class="list-group-item list-group-item-defult" style="padding: 20px;">{$k['kname']}<spen style="padding: 20px;"> {$k['kid']} </spen></li>
-            </a>
+            <li class="list-group-item list-group-item-defult" style="padding: 20px;">
+                    <span class="href" data-href="{php echo $this->createMobileUrl('index',array('kid'=>$k['kid'],'member'=>true,'op'=>'show' ) )}" >
+                        <span>
+                        {$k['kname']}
+                        </span>
+                        <spen style="padding: 0 10px">
+                            {$k['kid']}
+                        </spen>
+                    </span>
+                <span style=" float: right;">
+                    {if $k['is_subscribe'] == '0'}
+                    <button class="btn btn-success subscribe" data-subscribe="1">订阅</button>
+                    {else}
+                        <button class="btn btn-primary subscribe" data-subscribe="0">取消订阅</button>
+                    {/if}
+                </span>
+
+            </li>
           {/if}
         {/loop}
     </div>
     <div class="tab-pane fade" id="oss">
         {loop $kcode $i $k}
         {if $k['state'] !== '3'}
-            <a href="{php echo $this->createMobileUrl('cover1',array('kid'=>$k['kid']) )}" style="color: #0a0a0a">
-                <li class="list-group-item list-group-item-defult" style="padding: 20px;">{$k['kname']}<spen style="padding: 20px;"> {$k['kid']} </spen></li>
-            </a>
+            <li class="list-group-item list-group-item-defult" style="padding: 20px;">
+                <span class="href" data-href="{php echo $this->createMobileUrl('index',array('kid'=>$k['kid'],'member'=>true,'op'=>'show' ) )}" >
+                    <span>
+                    {$k['kname']}
+                    </span>
+                    <spen style="padding: 0 10px">
+                        {$k['kid']}
+                    </spen>
+                </span>
+                <span style=" float: right;">
+                    {if $k['is_subscribe'] == '0'}
+                    <button class="btn btn-success subscribe" data-subscribe="1">订阅</button>
+                    {else}
+                        <button class="btn btn-primary subscribe" data-subscribe="0">取消订阅</button>
+                    {/if}
+                </span>
+
+            </li>
         {/if}
         {/loop}
     </div>
 </div>
+
+<script>
+    $.ready(function () {
+
+        // 点击查询
+        $('.href').click(function () {
+            var href = $(this).data(href);
+            window.location.href = href.href;
+
+        })
+
+        // 点击订阅 和 取消订阅
+
+
+    });
+
+
+
+
+
+
+</script>
 
 {template 'common/_footer'}

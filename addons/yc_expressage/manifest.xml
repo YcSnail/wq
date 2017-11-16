@@ -3,7 +3,7 @@
 	<application setting="false">
 		<name><![CDATA[yc_expressage]]></name>
 		<identifie><![CDATA[yc_expressage]]></identifie>
-		<version><![CDATA[2.0]]></version>
+		<version><![CDATA[2.1]]></version>
 		<type><![CDATA[business]]></type>
 		<ability><![CDATA[yc_expressage快递查询]]></ability>
 		<description><![CDATA[yc_expressage快递查询插件]]></description>
@@ -26,6 +26,7 @@
 		<menu>
 			<entry title="查询快递" do="index" state="" direct="false" />
 			<entry title="添加快递api" do="api" state="" direct="false" />
+            <entry title="通知" do="test" state="" direct="false" />
 		</menu>
 	</bindings>
 	<install><![CDATA[install.php]]></install>

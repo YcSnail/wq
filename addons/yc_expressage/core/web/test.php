@@ -1,11 +1,19 @@
 <?php
 // +----------------------------------------------------------------------
-// | WSHOTO [ 技术主导，服务至上，提供微信端解决方案 ]
+// |  [ 我的梦想是星辰大海 ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2016-2020 http://www.wshoto.com All rights reserved.
+// | Author: yc  yc@yuanxu.top
 // +----------------------------------------------------------------------
-// | Author: yc <yc@yuanxu.top>
+// | Date: 17.7.23 Time: 15:51
 // +----------------------------------------------------------------------
+global $_W,$_GPC;
+//
+$sub = m('subscribe');
+$aa = $sub->getSubscribe(710424461260,true);
 
+dump($aa);
+die();
 
-include $this->template('shop/adv');
+$openid = 'omdV8v4VCMOT6wa7G_bkWxgeLHY4';
+$send = m('notice');
+$res = $send->sendMessage($openid);
